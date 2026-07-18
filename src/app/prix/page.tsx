@@ -1,0 +1,3 @@
+import { ListingPage } from "@/components/ui/ListingPage";
+export const metadata = { title: "Prix indicatifs des travaux au Maroc" };
+export default function PricesPage() { return <ListingPage eyebrow="Référentiel en préparation" title="Prix des travaux au Maroc" intro="Des fourchettes indicatives, organisées par type de projet et bientôt alimentées par un référentiel administrable. Elles ne constituent pas des devis." items={[{ title: "Peinture intérieure", text: "Repères par m² selon la préparation et la finition." }, { title: "Carrelage", text: "Repères de pose selon le support et le format." }, { title: "Rénovation", text: "Ordres de grandeur selon l’état initial et le périmètre." }]} />; }

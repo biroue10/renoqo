@@ -1,0 +1,4 @@
+import Link from "next/link";
+import { Container } from "./Container";
+type Item = { title: string; text: string; href?: string; id?: string };
+export function ListingPage({ eyebrow, title, intro, items }: { eyebrow: string; title: string; intro: string; items: Item[] }) { return <div className="inner-page"><Container><p className="eyebrow">{eyebrow}</p><h1>{title}</h1><p className="inner-intro">{intro}</p><div className="listing-grid">{items.map(item => <article id={item.id} key={item.title}><h2>{item.title}</h2><p>{item.text}</p>{item.href && <Link className="text-link" href={item.href}>En savoir plus →</Link>} {!item.href && <span className="soon">Disponible prochainement</span>}</article>)}</div><Link href="/" className="button button-secondary">Retour à l’accueil</Link></Container></div>; }

@@ -1,0 +1,5 @@
+import Link from "next/link";
+import { Container } from "@/components/ui/Container";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { calculators } from "@/data/services";
+export function CalculatorSection() { return <section className="section calculators"><Container><div className="section-split"><SectionHeading align="left" eyebrow="Outils pratiques" title="Des calculateurs pour mieux décider" description="Quelques minutes suffisent pour cadrer votre projet. Les résultats restent indicatifs et pourront être affinés avec un professionnel." /><Link href="/calculateurs" className="text-link">Voir tous les calculateurs →</Link></div><div className="calculator-grid">{calculators.map((item, i) => <article key={item.slug} className={`calculator-card calculator-${i + 1}`}><span className="calculator-index">0{i + 1}</span><p className="mini-label">En quelques minutes</p><h3>{item.title}</h3><p>{item.description}</p><Link className="button button-light" href={`/calculateurs#${item.slug}`}>Commencer <span aria-hidden="true">→</span></Link></article>)}</div></Container></section>; }

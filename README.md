@@ -1,80 +1,49 @@
 # Renoqo
 
-> **Estimate. Compare. Build.**
+> **Estimate. Compare. Build. — Estimez. Comparez. Réalisez.**
 
-Renoqo est une plateforme internationale d'estimation du coût des travaux de rénovation,
-de découverte de professionnels du bâtiment et de demande de devis.
+Renoqo est une plateforme internationale d’estimation du coût des travaux, de comparaison de prix et de mise en relation avec des professionnels. Ce dépôt contient son MVP frontend Next.js, initialement adapté au marché marocain.
 
-## Vision
+## Démarrage
 
-Renoqo est conçu dès le départ comme un produit **international** : architecture multi-pays,
-multi-devises et multi-langues. Le **marché initial est le Maroc**, qui sert de terrain de
-validation avant l'ouverture progressive à d'autres pays.
-
-## Fonctionnalités prévues
-
-- **Estimation du prix des travaux** — fourchettes de coûts par type de chantier, basées sur des
-  référentiels locaux.
-- **Calculateurs** — surfaces, quantités de matériaux, budgets par poste.
-- **Comparaison des professionnels** — profils, spécialités, zones d'intervention, avis.
-- **Demandes de devis** — mise en relation entre particuliers et professionnels qualifiés.
-- **Gestion multi-pays** — devises, langues, unités et référentiels de prix propres à chaque marché.
-
-## Statut
-
-🚧 **Développement initial.** Le dépôt contient pour l'instant la structure de base ; aucune
-application n'est encore implémentée.
-
-## Structure du dépôt
-
-```
-renoqo/
-├── .github/
-│   ├── ISSUE_TEMPLATE/   # modèles d'issues
-│   └── workflows/        # pipelines CI/CD
-├── docs/                 # documentation technique et produit
-├── scripts/              # scripts utilitaires et d'automatisation
-├── src/                  # code source de l'application
-├── tests/                # tests automatisés
-├── .editorconfig         # conventions d'édition
-├── .env.example          # variables d'environnement (valeurs fictives)
-├── .gitignore
-├── README.md
-└── SECURITY.md           # politique de sécurité
+```bash
+npm install
+npm run dev
 ```
 
-## Prérequis
+L’application est ensuite disponible sur `http://localhost:3000`. Définissez `NEXT_PUBLIC_SITE_URL` pour produire les URL SEO absolues de l’environnement cible.
 
-- Git
-- Un environnement Linux, macOS ou Windows (WSL recommandé)
-- Les dépendances applicatives seront précisées lors du choix de la stack
+## Validation
 
-## Installation
+```bash
+npm run lint
+npm run typecheck
+npm run test
+npm run build
+npm run validate:performance
+```
 
-_À compléter._ Cette section documentera la procédure d'installation dès que la stack technique
-sera arrêtée.
+Le dernier script analyse les chunks JavaScript initiaux du build, les compresse en gzip et impose un budget maximal de **260 000 octets**.
 
-## Développement
+## Architecture
 
-_À compléter._ Cette section documentera le lancement en local, les conventions de code et la
-procédure de test.
+- `src/app` : App Router, métadonnées et routes publiques ;
+- `src/components/layout` : header responsive, navigation mobile et footer ;
+- `src/components/home` : sections autonomes de la page d’accueil ;
+- `src/components/ui` : primitives visuelles réutilisables ;
+- `src/data` : données temporaires de services, villes, guides et FAQ ;
+- `src/lib/estimate.ts` : moteur provisoire d’estimation typé ;
+- `tests` : tests unitaires de la logique métier ;
+- `scripts/check-performance.mjs` : contrôle du budget JavaScript.
 
-## Contribution
+Le calculateur multiplie un tarif indicatif au m² par la surface, puis applique des coefficients de ville et de finition. Une marge basse/haute produit une fourchette arrondie à 100 MAD. Ces coefficients et tous les prix sont des **données de démonstration**, clairement non contractuelles, destinées à être remplacées par un référentiel administrable.
 
-- Travailler sur une branche dédiée créée depuis `develop`, jamais directement sur `main`.
-- Utiliser des messages de commit au format [Conventional Commits](https://www.conventionalcommits.org/)
-  (`feat:`, `fix:`, `chore:`, `docs:`…).
-- Ouvrir une Pull Request vers `develop` et attendre une revue avant fusion.
-- Garder l'arbre propre : pas de fichiers générés, pas de dépendances commitées.
+## Prochaines étapes
 
-## Sécurité
+- connecter prix, villes, catégories et guides à un CMS ou une base de données ;
+- implémenter la demande de devis, l’authentification et la protection anti-abus ;
+- définir le processus réel de vérification des professionnels ;
+- compléter les pages légales avec des informations validées ;
+- ajouter l’internationalisation et les marchés par pays selon la stratégie de [docs/homepage.md](docs/homepage.md).
 
-> ⚠️ **Aucun secret ne doit être ajouté au dépôt.** Les tokens, mots de passe, clés d'API et clés
-> privées se configurent exclusivement via des variables d'environnement locales ou les secrets du
-> gestionnaire de CI. `.env.example` ne contient que des valeurs fictives.
-
-Pour signaler une vulnérabilité, voir [SECURITY.md](SECURITY.md).
-
----
-
-**Renoqo — Estimate. Compare. Build.**
+Voir [docs/homepage.md](docs/homepage.md) pour la documentation fonctionnelle détaillée et [SECURITY.md](SECURITY.md) pour le signalement de vulnérabilités.
