@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . --max-warnings=0",
+    "lint": "eslint . --max-warnings=0 --ignore-pattern \"out/**\" --ignore-pattern \".next/**\" --ignore-pattern \"coverage/**\" --ignore-pattern \"dist/**\" --ignore-pattern \"build/**\"",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "validate:performance": "node scripts/check-performance.mjs"
