@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   openGraph: { type: "website", locale: "fr_MA", url: "/", siteName: "Renoqo", title: "Renoqo Maroc — Estimation du prix des travaux", description: "Estimez vos travaux, comparez les prix et préparez vos demandes de devis au Maroc.", images: [{ url: "/og-renoqo.svg", width: 1200, height: 630, alt: "Renoqo — Estimez. Comparez. Réalisez." }] },
   twitter: { card: "summary_large_image", title: "Renoqo Maroc — Estimation du prix des travaux", description: "Estimez vos travaux et comparez les prix au Maroc.", images: ["/og-renoqo.svg"] },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
+  verification: { google: "j5fyd26SPTDhp5J60OtRFKLsgDrGQ2dWTNxVqqI0ydI" },
   icons: { icon: "/favicon.svg" },
 };
 export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#0b3155" };
