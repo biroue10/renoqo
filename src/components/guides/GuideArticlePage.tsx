@@ -4,6 +4,7 @@ import { LOCALE_TAGS } from "@/i18n/config";
 import { absoluteGuideUrl, SITE_URL } from "@/lib/metadata";
 import { Container } from "@/components/ui/Container";
 import { LocaleLink } from "@/components/ui/LocaleLink";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 const copy = {
   fr: { guides: "Guides", answer: "Réponse courte", takeaways: "À retenir", toc: "Sommaire", checklist: "Checklist avant de commencer", faq: "Questions fréquentes", method: "Méthodologie éditoriale", methodText: "Ce guide ne publie aucun prix de marché non vérifié. Les exemples sont pédagogiques, fictifs et non contractuels. Les données et règles éventuelles doivent être vérifiées selon le projet auprès de professionnels et de sources officielles actuelles. L’équipe Renoqo révise le périmètre, les liens, les dates et les sources lors de chaque mise à jour.", published: "Publié le", updated: "Mis à jour le", reading: "min de lecture", related: "Guides associés", calculator: "Calculer le coût estimatif de vos travaux", quote: "Comparer plusieurs devis de professionnels", prices: "Consulter les prix indicatifs des travaux", services: "Services utiles", disclaimer: "Les résultats restent indicatifs et varient selon le projet, les matériaux, l’accès et les professionnels consultés." },
@@ -30,7 +31,7 @@ export function GuideArticlePage({ article }: { article: GuideArticle }) {
     { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: t.guides, item: `${SITE_URL.replace(/\/$/, "")}${article.locale === "en" ? "/en/guides/" : "/guides/"}` }, { "@type": "ListItem", position: 2, name: article.title, item: canonical }] },
   ];
   return <main className="guide-page">
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
+    <JsonLd data={jsonLd} />
     <Container>
       <nav className="breadcrumb" aria-label="Breadcrumb"><LocaleLink locale={article.locale} href="/guides">{t.guides}</LocaleLink><span aria-hidden="true">/</span><span aria-current="page">{article.category}</span></nav>
       <header className="guide-header">

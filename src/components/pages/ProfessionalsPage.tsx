@@ -8,6 +8,7 @@ import { localizedPath } from "@/i18n/locale-path";
 import { LOCALE_TAGS } from "@/i18n/config";
 import { absoluteUrl } from "@/lib/metadata";
 import { FAQSection } from "@/components/home/FAQSection";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 /**
  * "For professionals" landing page: what Renoqo offers, how the review works,
@@ -29,7 +30,7 @@ export function ProfessionalsPage({ locale }: { locale: Locale }) {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
+      <JsonLd data={jsonLd} />
 
       <section className="pro-hero">
         <div className="hero-grid-bg" aria-hidden="true" />
