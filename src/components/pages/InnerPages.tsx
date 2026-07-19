@@ -2,7 +2,9 @@ import { notFound } from "next/navigation";
 import { ListingPage } from "@/components/ui/ListingPage";
 import { calculators } from "@/data/services";
 import { cities } from "@/data/cities";
-import { guides } from "@/data/guides";
+import { guideArticles, guidePath } from "@/data/guides";
+import { Container } from "@/components/ui/Container";
+import { LocaleLink } from "@/components/ui/LocaleLink";
 import { services } from "@/data/services";
 import type { Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/get-dictionary";
@@ -40,16 +42,14 @@ export function PricesPage({ locale }: { locale: Locale }) {
 
 export function GuidesIndexPage({ locale }: { locale: Locale }) {
   const d = getDictionary(locale);
-  return (
-    <ListingPage
-      locale={locale}
-      labels={listingLabels(d)}
-      eyebrow={d.guides.pageEyebrow}
-      title={d.guides.pageTitle}
-      intro={d.guides.pageIntro}
-      items={guides.map(({ slug }) => ({ title: d.guides.items[slug].title, text: d.guides.items[slug].summary, href: `/guides/${slug}` }))}
-    />
-  );
+  const copy = locale === "fr" ? { home: "Accueil", updated: "Mis à jour le", read: "Lire le guide", calc: "Calculer le coût estimatif de vos travaux", quote: "Demander plusieurs devis" } : { home: "Home", updated: "Updated", read: "Read the guide", calc: "Calculate an indicative project estimate", quote: "Request several quotes" };
+  const items = guideArticles.filter((item) => item.locale === locale);
+  return <main className="inner-page guides-index"><Container>
+    <nav className="breadcrumb" aria-label="Breadcrumb"><LocaleLink locale={locale} href="/">{copy.home}</LocaleLink><span aria-hidden="true">/</span><span aria-current="page">{d.guides.pageTitle}</span></nav>
+    <p className="eyebrow">{d.guides.pageEyebrow}</p><h1>{d.guides.pageTitle}</h1><p className="inner-intro">{d.guides.pageIntro}</p>
+    <div className="listing-grid">{items.map((item) => <article key={item.key}><p className="eyebrow">{item.category}</p><h2>{item.title}</h2><p>{item.excerpt}</p><p className="guide-card-meta">{item.readingTime} min · {copy.updated} <time dateTime={item.modifiedAt}>{item.modifiedAt}</time></p><LocaleLink className="text-link" locale={locale} href={guidePath(item)} aria-label={`${copy.read}: ${item.title}`}>{copy.read} →</LocaleLink></article>)}</div>
+    <div className="guides-index-actions"><LocaleLink className="button button-primary" locale={locale} href="/calculateurs">{copy.calc}</LocaleLink><LocaleLink className="button button-secondary" locale={locale} href="/demander-un-devis">{copy.quote}</LocaleLink></div>
+  </Container></main>;
 }
 
 /** Resolves a catch-all slug to its translated title and intro, or `null`. */
@@ -61,9 +61,6 @@ export function resolveSlug(locale: Locale, slug: string): { title: string; text
 
   const city = cities.find((item) => `villes/${item.slug}` === slug);
   if (city) return { title: d.cities.pageTitle(city.name), text: d.cities.pageText(city.name) };
-
-  const guide = guides.find((item) => `guides/${item.slug}` === slug);
-  if (guide) return { title: d.guides.items[guide.slug].title, text: `${d.guides.items[guide.slug].summary} ${d.guides.detailSuffix}` };
 
   const staticTitle = (d.staticPages as Record<string, string | undefined>)[slug];
   if (staticTitle) return { title: staticTitle, text: d.listing.staticText };
