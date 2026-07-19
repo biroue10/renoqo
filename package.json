@@ -9,7 +9,8 @@
     "lint": "eslint . --max-warnings=0 --ignore-pattern \"out/**\" --ignore-pattern \".next/**\" --ignore-pattern \"coverage/**\" --ignore-pattern \"dist/**\" --ignore-pattern \"build/**\"",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "validate:performance": "node scripts/check-performance.mjs"
+    "validate:performance": "node scripts/check-performance.mjs",
+    "deploy": "wrangler deploy --config wrangler.jsonc"
   },
   "dependencies": {
     "next": "^15.4.1",
@@ -29,6 +30,7 @@
     "jsdom": "^26.1.0",
     "tailwindcss": "^4.1.11",
     "typescript": "^5.8.3",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "wrangler": "^4.112.0"
   }
 }
