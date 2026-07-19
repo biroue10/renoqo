@@ -1,8 +1,9 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { cities } from "@/data/cities";
 import type { Locale } from "@/i18n/config";
 import { calculateEstimate, formatMAD, validateEstimate, type EstimateField, type EstimateInput, type ValidationErrors } from "@/lib/estimate";
+import { trackEvent } from "@/lib/analytics";
 
 /** Option order is fixed here; the labels come from the active dictionary. */
 const PROJECT_ORDER = ["renovation", "peinture", "plomberie", "electricite", "carrelage", "construction", "cuisine", "bain", "climatisation", "solaire"] as const;
@@ -27,9 +28,15 @@ export function QuickEstimateForm({ locale, labels }: { locale: Locale; labels: 
   const [values, setValues] = useState(initial);
   const [errors, setErrors] = useState<ValidationErrors>({});
   const [result, setResult] = useState<{ low: number; high: number }>();
+  const started = useRef(false);
 
-  const change = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
+  const change = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    if (!started.current) {
+      started.current = true;
+      trackEvent("calculator_started", { calculator_type: "quick_estimate" });
+    }
     setValues({ ...values, [event.target.name]: event.target.value });
+  };
 
   const submit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -41,12 +48,14 @@ export function QuickEstimateForm({ locale, labels }: { locale: Locale; labels: 
       return;
     }
     setResult(calculateEstimate(input));
+    trackEvent("calculator_completed", { calculator_type: "quick_estimate", project_type: input.project, city_id: input.city, finish_level: input.finish });
   };
 
   const reset = () => {
     setValues(initial);
     setErrors({});
     setResult(undefined);
+    started.current = false;
   };
 
   const describedBy = (name: EstimateField) => (errors[name] ? `${name}-error` : undefined);

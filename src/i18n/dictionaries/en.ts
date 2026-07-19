@@ -313,6 +313,13 @@ export const en: Dictionary = {
     primary: "Estimate my project",
     secondary: "Request quotes",
   },
+  analyticsConsent: {
+    title: "Audience measurement",
+    message: "With your permission, Renoqo uses Google Analytics to understand how the site is used. Our events contain no personal data.",
+    accept: "Accept audience measurement",
+    decline: "Decline",
+    settings: "Audience measurement settings",
+  },
   footer: {
     slogan: "Clearer decisions for your building and renovation projects.",
     tagline: "Estimate. Compare. Build.",

@@ -4,6 +4,7 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { globalStructuredData } from "@/lib/structured-data";
+import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 
 /**
  * Shared chrome for every locale. Each locale has its own root layout so the
@@ -19,6 +20,7 @@ export function SiteLayout({ locale, children }: { locale: Locale; children: Rea
         <Header locale={locale} d={d} />
         <main id="contenu">{children}</main>
         <Footer locale={locale} d={d} />
+        <GoogleAnalytics locale={locale} labels={d.analyticsConsent} />
       </body>
     </html>
   );

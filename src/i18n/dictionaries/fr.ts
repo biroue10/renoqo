@@ -317,6 +317,13 @@ export const fr = {
     primary: "Estimer mes travaux",
     secondary: "Demander des devis",
   },
+  analyticsConsent: {
+    title: "Mesure d’audience",
+    message: "Avec votre accord, Renoqo utilise Google Analytics pour comprendre l’usage du site. Aucune donnée personnelle n’est incluse dans nos événements.",
+    accept: "Accepter la mesure d’audience",
+    decline: "Refuser",
+    settings: "Préférences de mesure d’audience",
+  },
   footer: {
     slogan: "Des décisions plus claires pour vos projets de travaux.",
     tagline: "Estimez. Comparez. Réalisez.",
