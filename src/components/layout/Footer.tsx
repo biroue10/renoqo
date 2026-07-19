@@ -1,14 +1,50 @@
-import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { LocaleLink } from "@/components/ui/LocaleLink";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/types";
 import { Logo } from "./Header";
 
-const groups = [
-  ["Renoqo", [["À propos", "/a-propos"], ["Comment ça marche", "/#fonctionnement"], ["Nos engagements", "/#engagements"], ["Contact", "/contact"]]],
-  ["Projets", [["Estimer mes travaux", "/#estimation"], ["Prix des travaux", "/prix"], ["Calculateurs", "/calculateurs"], ["Demander un devis", "/devis"]]],
-  ["Professionnels", [["Trouver un professionnel", "/professionnels"], ["Rejoindre Renoqo", "/professionnels/inscription"], ["Espace professionnel", "/pour-les-professionnels"], ["Centre d’aide", "/aide"]]],
-  ["Informations légales", [["Mentions légales", "/mentions-legales"], ["Conditions d’utilisation", "/conditions"], ["Politique de confidentialité", "/confidentialite"], ["Politique de cookies", "/cookies"], ["Règles relatives aux avis", "/regles-avis"]]],
+/** Group and link keys resolve against `footer.groups` / `footer.links`. */
+const GROUPS = [
+  { group: "brand", links: [["about", "/a-propos"], ["howItWorks", "/#fonctionnement"], ["commitments", "/#engagements"], ["contact", "/contact"]] },
+  { group: "projects", links: [["estimate", "/#estimation"], ["prices", "/prix"], ["calculators", "/calculateurs"], ["requestQuote", "/demander-un-devis"]] },
+  { group: "pros", links: [["findPro", "/professionnels"], ["joinRenoqo", "/professionnels/inscription"], ["proSpace", "/pour-les-professionnels"], ["helpCenter", "/centre-aide"]] },
+  { group: "legal", links: [["legalNotice", "/mentions-legales"], ["terms", "/conditions-utilisation"], ["privacy", "/politique-confidentialite"], ["cookies", "/politique-cookies"], ["reviewRules", "/regles-avis"]] },
 ] as const;
 
-export function Footer() {
-  return <footer className="site-footer"><Container><div className="footer-top"><div className="footer-brand"><Logo light /><p className="footer-slogan">Estimate. Compare. Build.</p><p>Des décisions plus claires pour vos projets de travaux.</p><label htmlFor="footer-country">Pays et marché</label><select id="footer-country" defaultValue="ma"><option value="ma">🇲🇦 Maroc</option><option disabled>Autres pays — bientôt</option></select></div>{groups.map(([title, links]) => <div className="footer-group" key={title}><h2>{title}</h2>{links.map(([label, href]) => <Link href={href} key={label}>{label}</Link>)}</div>)}</div><div className="footer-bottom"><p>© {new Date().getFullYear()} Renoqo. Tous droits réservés.</p><div className="socials" aria-label="Réseaux sociaux"><a href="#linkedin" aria-label="Renoqo sur LinkedIn">in</a><a href="#instagram" aria-label="Renoqo sur Instagram">ig</a><a href="#facebook" aria-label="Renoqo sur Facebook">f</a></div></div></Container></footer>;
+export function Footer({ locale, d }: { locale: Locale; d: Dictionary }) {
+  return (
+    <footer className="site-footer">
+      <Container>
+        <div className="footer-top">
+          <div className="footer-brand">
+            <Logo locale={locale} label={d.common.logoLabel} light />
+            <p className="footer-slogan">{d.footer.slogan}</p>
+            <p>{d.footer.tagline}</p>
+            <label htmlFor="footer-country">{d.common.countryAndMarket}</label>
+            <select id="footer-country" defaultValue="ma">
+              <option value="ma">{d.common.morocco}</option>
+              <option disabled>{d.common.otherCountriesSoon}</option>
+            </select>
+          </div>
+          {GROUPS.map(({ group, links }) => (
+            <div className="footer-group" key={group}>
+              <h2>{d.footer.groups[group]}</h2>
+              {links.map(([key, href]) => (
+                <LocaleLink locale={locale} href={href} key={href}>{d.footer.links[key]}</LocaleLink>
+              ))}
+            </div>
+          ))}
+        </div>
+        <div className="footer-bottom">
+          <p>{d.footer.rights(new Date().getFullYear())}</p>
+          <div className="socials" aria-label={d.footer.socialsLabel}>
+            <a href="#linkedin" aria-label={d.footer.linkedin}>in</a>
+            <a href="#instagram" aria-label={d.footer.instagram}>ig</a>
+            <a href="#facebook" aria-label={d.footer.facebook}>f</a>
+          </div>
+        </div>
+      </Container>
+    </footer>
+  );
 }

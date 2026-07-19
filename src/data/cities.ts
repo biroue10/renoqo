@@ -1,8 +1,14 @@
+/**
+ * City names are official Moroccan proper nouns and stay identical across
+ * locales; only the descriptive note is translated (see `cities.notes`).
+ */
 export const cities = [
-  { slug: "casablanca", name: "Casablanca", note: "Projets résidentiels et professionnels" },
-  { slug: "rabat", name: "Rabat", note: "Rénovation et construction" },
-  { slug: "marrakech", name: "Marrakech", note: "Habitat, riads et aménagement" },
-  { slug: "tanger", name: "Tanger", note: "Travaux et amélioration de l’habitat" },
-  { slug: "agadir", name: "Agadir", note: "Rénovation et équipements" },
-  { slug: "fes", name: "Fès", note: "Habitat traditionnel et contemporain" },
+  { slug: "casablanca", name: "Casablanca" },
+  { slug: "rabat", name: "Rabat" },
+  { slug: "marrakech", name: "Marrakech" },
+  { slug: "tanger", name: "Tanger" },
+  { slug: "agadir", name: "Agadir" },
+  { slug: "fes", name: "Fès" },
 ] as const;
+
+export type CitySlug = (typeof cities)[number]["slug"];
