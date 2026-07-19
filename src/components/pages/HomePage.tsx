@@ -12,24 +12,19 @@ import { FAQSection } from "@/components/home/FAQSection";
 import { FinalCTA } from "@/components/home/FinalCTA";
 import { LOCALE_TAGS, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/get-dictionary";
-import { absoluteUrl } from "@/lib/metadata";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 export function HomePage({ locale }: { locale: Locale }) {
   const d = getDictionary(locale);
-  const url = absoluteUrl(locale, "/");
-  const jsonLd = [
-    { "@context": "https://schema.org", "@type": "Organization", name: d.meta.siteName, url, slogan: d.footer.slogan },
-    { "@context": "https://schema.org", "@type": "WebSite", name: d.meta.siteName, url, inLanguage: LOCALE_TAGS[locale], description: d.meta.home.description },
-    {
+  const faqJsonLd = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
       inLanguage: LOCALE_TAGS[locale],
       mainEntity: d.faq.items.map((item) => ({ "@type": "Question", name: item.question, acceptedAnswer: { "@type": "Answer", text: item.answer } })),
-    },
-  ];
+    };
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
+      <JsonLd data={faqJsonLd} />
       <HeroSection locale={locale} d={d} />
       <TrustBar d={d} />
       <HowItWorks d={d} />

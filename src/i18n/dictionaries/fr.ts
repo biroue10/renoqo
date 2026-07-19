@@ -16,7 +16,7 @@ export const fr = {
       ogDescription: "Estimez vos travaux, comparez les prix et préparez vos demandes de devis au Maroc.",
     },
     titleTemplate: "%s | Renoqo",
-    ogImageAlt: "Renoqo — Estimez. Comparez. Réalisez.",
+    ogImageAlt: "Renoqo — Estimez, comparez et réalisez vos travaux",
   },
   common: {
     skipToContent: "Aller au contenu principal",
@@ -76,6 +76,13 @@ export const fr = {
     submit: "Calculer mon estimation",
     reset: "Recommencer",
     resultLabel: "Budget estimé",
+    lowLabel: "Estimation basse",
+    centralLabel: "Estimation centrale",
+    highLabel: "Estimation haute",
+    midpointMethod: "La valeur centrale est le point médian arrondi de la fourchette ; elle n’est pas plus précise que les bornes.",
+    warningTitle: "Estimation indicative — ce résultat ne constitue pas un devis.",
+    warningText: "Le prix réel peut varier selon l’état du chantier, les matériaux, l’accès, les quantités et le professionnel choisi.",
+    refine: "Affiner avec un professionnel",
     resultDisclaimer:
       "Cette estimation est indicative et ne constitue pas un devis contractuel. Elle dépend notamment des matériaux et de l’état du logement.",
     placeholder: "Renseignez ces quatre critères pour obtenir une première fourchette en MAD.",
@@ -316,6 +323,13 @@ export const fr = {
     description: "Obtenez une première estimation de votre budget et préparez votre demande de devis en quelques étapes.",
     primary: "Estimer mes travaux",
     secondary: "Demander des devis",
+  },
+  analyticsConsent: {
+    title: "Mesure d’audience",
+    message: "Avec votre accord, Renoqo utilise Google Analytics pour comprendre l’usage du site. Aucune donnée personnelle n’est incluse dans nos événements.",
+    accept: "Accepter la mesure d’audience",
+    decline: "Refuser",
+    settings: "Préférences de mesure d’audience",
   },
   footer: {
     slogan: "Des décisions plus claires pour vos projets de travaux.",

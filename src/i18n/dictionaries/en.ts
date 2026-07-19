@@ -13,7 +13,7 @@ export const en: Dictionary = {
       ogDescription: "Estimate your project, compare prices, and prepare your quote requests in Morocco.",
     },
     titleTemplate: "%s | Renoqo",
-    ogImageAlt: "Renoqo — Estimate. Compare. Build.",
+    ogImageAlt: "Renoqo — Estimate, compare, and complete your project",
   },
   common: {
     skipToContent: "Skip to main content",
@@ -73,6 +73,13 @@ export const en: Dictionary = {
     submit: "Calculate my estimate",
     reset: "Start over",
     resultLabel: "Estimated budget",
+    lowLabel: "Low estimate",
+    centralLabel: "Central estimate",
+    highLabel: "High estimate",
+    midpointMethod: "The central value is the rounded midpoint of the range; it is no more precise than either bound.",
+    warningTitle: "Indicative estimate — this result is not a quote.",
+    warningText: "The final price may vary depending on the condition of the site, materials, access, quantities, and the selected professional.",
+    refine: "Refine with a professional",
     resultDisclaimer:
       "This estimate is indicative and is not a binding quote. It depends on the materials used and the current condition of the property.",
     placeholder: "Enter these four criteria to receive an initial estimate in MAD.",
@@ -312,6 +319,13 @@ export const en: Dictionary = {
     description: "Get an initial estimate of your budget and prepare your quote request in just a few steps.",
     primary: "Estimate my project",
     secondary: "Request quotes",
+  },
+  analyticsConsent: {
+    title: "Audience measurement",
+    message: "With your permission, Renoqo uses Google Analytics to understand how the site is used. Our events contain no personal data.",
+    accept: "Accept audience measurement",
+    decline: "Decline",
+    settings: "Audience measurement settings",
   },
   footer: {
     slogan: "Clearer decisions for your building and renovation projects.",
