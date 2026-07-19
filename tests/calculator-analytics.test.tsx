@@ -20,5 +20,9 @@ describe("calculator analytics", () => {
     fireEvent.change(screen.getByLabelText(fr.estimate.finishLabel), { target: { value: "standard" } });
     fireEvent.click(screen.getByRole("button", { name: /Calculer/ }));
     expect(trackEvent).toHaveBeenCalledWith("calculator_completed", { calculator_type: "quick_estimate", project_type: "renovation", city_id: "casablanca", finish_level: "standard" });
+    const refine = screen.getByRole("link", { name: fr.estimate.refine });
+    refine.addEventListener("click", event => event.preventDefault());
+    fireEvent.click(refine);
+    expect(trackEvent).toHaveBeenCalledWith("estimate_professional_refinement_clicked", { project_type: "renovation", city_id: "casablanca", finish_level: "standard", locale: "fr" });
   });
 });

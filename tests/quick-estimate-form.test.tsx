@@ -69,4 +69,15 @@ describe("QuickEstimateForm", () => {
     expect(project.getAttribute("aria-invalid")).toBe("true");
     expect(project.getAttribute("aria-describedby")).toBe("project-error");
   });
+
+  it("shows three values, the warning and a localized quote prefill action", () => {
+    render(<QuickEstimateForm locale="en" labels={en.estimate} />);
+    fill({ project: "renovation", city: "casablanca", area: "80", finish: "standard" });
+    submit(en.estimate);
+    expect(screen.getByText("Low estimate")).toBeTruthy();
+    expect(screen.getByText("Central estimate")).toBeTruthy();
+    expect(screen.getByText("High estimate")).toBeTruthy();
+    expect(screen.getByText("Indicative estimate — this result is not a quote.")).toBeTruthy();
+    expect(screen.getByRole("link", { name: "Refine with a professional" }).getAttribute("href")).toBe("/en/demander-un-devis/?project=renovation&city=casablanca&area=80&finish=standard");
+  });
 });

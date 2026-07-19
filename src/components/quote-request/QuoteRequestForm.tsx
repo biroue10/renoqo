@@ -11,6 +11,7 @@ import { clearQuoteDraft, loadQuoteDraft, saveQuoteDraft } from "@/lib/quote-req
 import { isQuoteEndpointConfigured, submitQuoteRequest } from "@/lib/quote-request/submit";
 import type { QuoteDraft, QuoteSuccess } from "@/lib/quote-request/types";
 import type { quoteRequestFr } from "@/i18n/quote-request/fr";
+import { draftWithPrefill, parseQuotePrefill } from "@/lib/quote-request/prefill";
 
 type Labels=typeof quoteRequestFr;
 const entries=(map:Record<string,string>):Option[]=>Object.entries(map).map(([value,label])=>({value,label}));
@@ -19,7 +20,7 @@ const mergeDraft=(value:QuoteDraft):QuoteDraft=>{const empty=createQuoteDraft();
 
 export function QuoteRequestForm({locale,labels}:{locale:Locale;labels:Labels}){
  const [draft,setDraft]=useState(createQuoteDraft);const [files,setFiles]=useState<File[]>([]);const [step,setStep]=useState<QuoteStep>("project");const [review,setReview]=useState(false);const [errors,setErrors]=useState<Record<string,QuoteError>>({});const [fileErrors,setFileErrors]=useState<string[]>([]);const [savedAt,setSavedAt]=useState("");const [restored,setRestored]=useState(false);const [failure,setFailure]=useState("");const [result,setResult]=useState<QuoteSuccess>();const [submitting,setSubmitting]=useState(false);const [botField,setBotField]=useState("");const [announcement,setAnnouncement]=useState("");const headingRef=useRef<HTMLHeadingElement>(null);const started=useRef(false);const hydrated=useRef(false);const index=STEP_KEYS.indexOf(step);const errorMessage=useCallback((code:QuoteError)=>labels.errors[code],[labels]);
- useEffect(()=>{const stored=loadQuoteDraft();if(stored){setDraft(mergeDraft(stored.data));setSavedAt(stored.savedAt);setRestored(true);}hydrated.current=true;},[]);
+ useEffect(()=>{const stored=loadQuoteDraft();if(stored){setDraft(mergeDraft(stored.data));setSavedAt(stored.savedAt);setRestored(true);}else{setDraft(current=>draftWithPrefill(parseQuotePrefill(window.location.search),current));}hydrated.current=true;},[]);
  useEffect(()=>{if(!hydrated.current||result)return;const timer=setTimeout(()=>{const saved=saveQuoteDraft(draft);if(saved){setSavedAt(saved.savedAt);trackQuote(QUOTE_EVENTS.draftSaved,{step:index+1});}},700);return()=>clearTimeout(timer);},[draft,index,result]);
  const update=<K extends keyof QuoteDraft>(section:K,patch:Partial<QuoteDraft[K]>)=>{if(!started.current){started.current=true;trackQuote(QUOTE_EVENTS.started);}setDraft(current=>({...current,[section]:{...current[section],...patch}}));};
  const focusError=(found:Record<string,QuoteError>)=>{const id=Object.keys(found)[0];requestAnimationFrame(()=>{(document.getElementById(id)??document.getElementsByName(id)[0])?.focus();});};

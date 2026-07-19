@@ -76,6 +76,13 @@ export const fr = {
     submit: "Calculer mon estimation",
     reset: "Recommencer",
     resultLabel: "Budget estimé",
+    lowLabel: "Estimation basse",
+    centralLabel: "Estimation centrale",
+    highLabel: "Estimation haute",
+    midpointMethod: "La valeur centrale est le point médian arrondi de la fourchette ; elle n’est pas plus précise que les bornes.",
+    warningTitle: "Estimation indicative — ce résultat ne constitue pas un devis.",
+    warningText: "Le prix réel peut varier selon l’état du chantier, les matériaux, l’accès, les quantités et le professionnel choisi.",
+    refine: "Affiner avec un professionnel",
     resultDisclaimer:
       "Cette estimation est indicative et ne constitue pas un devis contractuel. Elle dépend notamment des matériaux et de l’état du logement.",
     placeholder: "Renseignez ces quatre critères pour obtenir une première fourchette en MAD.",

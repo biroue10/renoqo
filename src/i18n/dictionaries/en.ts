@@ -73,6 +73,13 @@ export const en: Dictionary = {
     submit: "Calculate my estimate",
     reset: "Start over",
     resultLabel: "Estimated budget",
+    lowLabel: "Low estimate",
+    centralLabel: "Central estimate",
+    highLabel: "High estimate",
+    midpointMethod: "The central value is the rounded midpoint of the range; it is no more precise than either bound.",
+    warningTitle: "Indicative estimate — this result is not a quote.",
+    warningText: "The final price may vary depending on the condition of the site, materials, access, quantities, and the selected professional.",
+    refine: "Refine with a professional",
     resultDisclaimer:
       "This estimate is indicative and is not a binding quote. It depends on the materials used and the current condition of the property.",
     placeholder: "Enter these four criteria to receive an initial estimate in MAD.",

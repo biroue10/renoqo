@@ -4,6 +4,7 @@ import { cities } from "@/data/cities";
 import type { Locale } from "@/i18n/config";
 import { calculateEstimate, formatMAD, validateEstimate, type EstimateField, type EstimateInput, type ValidationErrors } from "@/lib/estimate";
 import { trackEvent } from "@/lib/analytics";
+import { estimateBreakdownWeights, estimateMidpoint, quotePrefillHref } from "@/lib/estimate-result";
 
 /** Option order is fixed here; the labels come from the active dictionary. */
 const PROJECT_ORDER = ["renovation", "peinture", "plomberie", "electricite", "carrelage", "construction", "cuisine", "bain", "climatisation", "solaire"] as const;
@@ -16,7 +17,8 @@ type Labels = {
   areaLabel: string; areaPlaceholder: string; areaUnit: string;
   finishLabel: string; finishPlaceholder: string;
   submit: string; reset: string;
-  resultLabel: string; resultDisclaimer: string; placeholder: string; errorSummary: string;
+  resultLabel: string; resultDisclaimer: string; lowLabel: string; centralLabel: string; highLabel: string;
+  midpointMethod: string; warningTitle: string; warningText: string; refine: string; placeholder: string; errorSummary: string;
   projects: Record<(typeof PROJECT_ORDER)[number], string>;
   finishes: Record<(typeof FINISH_ORDER)[number], string>;
   errors: Record<EstimateField, string>;
@@ -27,7 +29,7 @@ const initial = { project: "", city: "", area: "", finish: "" };
 export function QuickEstimateForm({ locale, labels }: { locale: Locale; labels: Labels }) {
   const [values, setValues] = useState(initial);
   const [errors, setErrors] = useState<ValidationErrors>({});
-  const [result, setResult] = useState<{ low: number; high: number }>();
+  const [result, setResult] = useState<{ low: number; high: number; input: EstimateInput }>();
   const started = useRef(false);
 
   const change = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -47,7 +49,7 @@ export function QuickEstimateForm({ locale, labels }: { locale: Locale; labels: 
       setResult(undefined);
       return;
     }
-    setResult(calculateEstimate(input));
+    setResult({ ...calculateEstimate(input), input });
     trackEvent("calculator_completed", { calculator_type: "quick_estimate", project_type: input.project, city_id: input.city, finish_level: input.finish });
   };
 
@@ -108,9 +110,12 @@ export function QuickEstimateForm({ locale, labels }: { locale: Locale; labels: 
       <div className="estimate-result" aria-live="polite" aria-atomic="true">
         {result ? (
           <>
-            <p>{labels.resultLabel}</p>
-            <strong>{formatMAD(result.low, locale)} – {formatMAD(result.high, locale)}</strong>
-            <small>{labels.resultDisclaimer}</small>
+            <h3>{labels.resultLabel}</h3>
+            <div className="estimate-levels"><div><span>{labels.lowLabel}</span><strong>{formatMAD(result.low, locale)}</strong></div><div className="estimate-central"><span>{labels.centralLabel}</span><strong>{formatMAD(estimateMidpoint(result.low,result.high), locale)}</strong></div><div><span>{labels.highLabel}</span><strong>{formatMAD(result.high, locale)}</strong></div></div>
+            {estimateBreakdownWeights[result.input.project] ? <div className="estimate-breakdown" /> : null}
+            <small>{labels.midpointMethod}</small>
+            <aside className="estimate-warning" aria-label={labels.warningTitle}><strong>{labels.warningTitle}</strong><p>{labels.warningText}</p></aside>
+            <a className="button button-primary estimate-refine" href={quotePrefillHref(result.input,locale)} onClick={()=>trackEvent("estimate_professional_refinement_clicked",{project_type:result.input.project,city_id:result.input.city,finish_level:result.input.finish,locale})}>{labels.refine}</a>
           </>
         ) : (
           <p className="result-placeholder">{Object.keys(errors).length ? labels.errorSummary : labels.placeholder}</p>
