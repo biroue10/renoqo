@@ -51,13 +51,13 @@ export function buildMetadata(locale: Locale, path: string, { title, description
       siteName: d.meta.siteName,
       title: ogTitle ?? title,
       description: ogDescription ?? description,
-      images: [{ url: "/og-renoqo.svg", width: 1200, height: 630, alt: d.meta.ogImageAlt }],
+      images: [{ url: "/og-renoqo.png", width: 1200, height: 630, type: "image/png", alt: d.meta.ogImageAlt }],
     },
     twitter: {
       card: "summary_large_image",
       title: ogTitle ?? title,
       description: ogDescription ?? description,
-      images: ["/og-renoqo.svg"],
+      images: ["/og-renoqo.png"],
     },
   };
 }
@@ -74,7 +74,7 @@ export function buildGuideMetadata(article: GuideArticle): Metadata {
     title: { absolute: article.seoTitle }, description: article.description,
     alternates: { canonical, languages: { "fr-MA": french, "en-MA": english, "x-default": french } },
     robots: { index: true, follow: true },
-    openGraph: { type: "article", locale: OG_LOCALES[article.locale], url: canonical, siteName: "Renoqo", title: article.seoTitle, description: article.description, publishedTime: article.publishedAt, modifiedTime: article.modifiedAt, images: [{ url: "/og-renoqo.svg", width: 1200, height: 630, alt: article.title }] },
-    twitter: { card: "summary_large_image", title: article.seoTitle, description: article.description, images: ["/og-renoqo.svg"] },
+    openGraph: { type: "article", locale: OG_LOCALES[article.locale], url: canonical, siteName: "Renoqo", title: article.seoTitle, description: article.description, publishedTime: article.publishedAt, modifiedTime: article.modifiedAt, images: [{ url: "/og-renoqo.png", width: 1200, height: 630, type: "image/png", alt: article.locale === "fr" ? "Renoqo — Estimez, comparez et réalisez vos travaux" : "Renoqo — Estimate, compare, and complete your project" }] },
+    twitter: { card: "summary_large_image", title: article.seoTitle, description: article.description, images: ["/og-renoqo.png"] },
   };
 }

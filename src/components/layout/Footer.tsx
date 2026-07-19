@@ -36,14 +36,7 @@ export function Footer({ locale, d }: { locale: Locale; d: Dictionary }) {
             </div>
           ))}
         </div>
-        <div className="footer-bottom">
-          <p>{d.footer.rights(new Date().getFullYear())}</p>
-          <div className="socials" aria-label={d.footer.socialsLabel}>
-            <a href="#linkedin" aria-label={d.footer.linkedin}>in</a>
-            <a href="#instagram" aria-label={d.footer.instagram}>ig</a>
-            <a href="#facebook" aria-label={d.footer.facebook}>f</a>
-          </div>
-        </div>
+        <div className="footer-bottom"><p>{d.footer.rights(new Date().getFullYear())}</p></div>
       </Container>
     </footer>
   );

@@ -16,7 +16,7 @@ export const fr = {
       ogDescription: "Estimez vos travaux, comparez les prix et préparez vos demandes de devis au Maroc.",
     },
     titleTemplate: "%s | Renoqo",
-    ogImageAlt: "Renoqo — Estimez. Comparez. Réalisez.",
+    ogImageAlt: "Renoqo — Estimez, comparez et réalisez vos travaux",
   },
   common: {
     skipToContent: "Aller au contenu principal",

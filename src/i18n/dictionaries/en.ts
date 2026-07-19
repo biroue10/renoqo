@@ -13,7 +13,7 @@ export const en: Dictionary = {
       ogDescription: "Estimate your project, compare prices, and prepare your quote requests in Morocco.",
     },
     titleTemplate: "%s | Renoqo",
-    ogImageAlt: "Renoqo — Estimate. Compare. Build.",
+    ogImageAlt: "Renoqo — Estimate, compare, and complete your project",
   },
   common: {
     skipToContent: "Skip to main content",

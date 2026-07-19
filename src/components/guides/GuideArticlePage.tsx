@@ -26,7 +26,7 @@ export function GuideArticlePage({ article }: { article: GuideArticle }) {
   const canonical = absoluteGuideUrl(article);
   const organizationId = `${SITE_URL.replace(/\/$/, "")}#organization`;
   const jsonLd = [
-    { "@context": "https://schema.org", "@type": "Article", headline: article.title, description: article.description, image: `${SITE_URL.replace(/\/$/, "")}/og-renoqo.svg`, datePublished: article.publishedAt, dateModified: article.modifiedAt, author: { "@type": "Organization", name: article.author }, publisher: { "@type": "Organization", "@id": organizationId, name: "Renoqo", url: SITE_URL }, mainEntityOfPage: canonical, inLanguage: LOCALE_TAGS[article.locale] },
+    { "@context": "https://schema.org", "@type": "Article", headline: article.title, description: article.description, image: `${SITE_URL.replace(/\/$/, "")}/og-renoqo.png`, datePublished: article.publishedAt, dateModified: article.modifiedAt, author: { "@type": "Organization", name: article.author }, publisher: { "@type": "Organization", "@id": organizationId, name: "Renoqo", url: SITE_URL }, mainEntityOfPage: canonical, inLanguage: LOCALE_TAGS[article.locale] },
     { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: t.guides, item: `${SITE_URL.replace(/\/$/, "")}${article.locale === "en" ? "/en/guides/" : "/guides/"}` }, { "@type": "ListItem", position: 2, name: article.title, item: canonical }] },
   ];
   return <main className="guide-page">
