@@ -64,7 +64,9 @@ describe("LanguageSwitcher", () => {
   it("records the preference and closes the menu on selection", () => {
     render(<LanguageSwitcher locale="fr" labels={labelsFor("fr")} />);
     open();
-    fireEvent.click(screen.getByRole("menuitem", { name: "English" }));
+    const english = screen.getByRole("menuitem", { name: "English" });
+    english.addEventListener("click", (event) => event.preventDefault());
+    fireEvent.click(english);
     expect(localStorage.getItem(LOCALE_STORAGE_KEY)).toBe("en");
     expect(screen.queryByRole("menuitem", { name: "English" })).toBeNull();
   });

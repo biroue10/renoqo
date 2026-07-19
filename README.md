@@ -1,5 +1,7 @@
 # Renoqo
 
+Documentation fonctionnelle : [demande de devis](docs/quote-request.md) et [contrat API futur](docs/quote-request-api.md).
+
 > **Estimate. Compare. Build. — Estimez. Comparez. Réalisez.**
 
 Renoqo est une plateforme internationale d’estimation du coût des travaux, de comparaison de prix et de mise en relation avec des professionnels. Ce dépôt contient son MVP frontend Next.js, initialement adapté au marché marocain.
