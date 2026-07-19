@@ -33,8 +33,10 @@ Le dernier script analyse les chunks JavaScript initiaux du build, les compresse
 - `src/components/home` : sections autonomes de la page d’accueil ;
 - `src/components/pages` : implémentations de pages partagées entre les langues ;
 - `src/components/ui` : primitives visuelles réutilisables ;
+- `src/components/professional` : formulaire d’inscription professionnelle multiétape ;
 - `src/data` : données temporaires (services, villes, guides, prix) et registre des routes ;
 - `src/lib/estimate.ts` : moteur provisoire d’estimation typé ;
+- `src/lib/professional-registration` : constantes métier, validation, brouillon et soumission ;
 - `src/lib/metadata.ts` : canonical, hreflang, Open Graph et Twitter par langue ;
 - `tests` : tests unitaires de la logique métier et de l’internationalisation ;
 - `scripts/check-performance.mjs` : contrôle du budget JavaScript.
@@ -53,18 +55,36 @@ Le français est la langue par défaut et reste servi à la racine ; l’anglais
 | `/guides/` | `/en/guides/` |
 | `/services/renovation/` | `/en/services/renovation/` |
 | `/villes/casablanca/` | `/en/villes/casablanca/` |
+| `/pour-les-professionnels/` | `/en/pour-les-professionnels/` |
 
 Le sélecteur de langue du header propose **Français**, **English** et **العربية — bientôt** (désactivé, sans traduction inventée). Chaque option est un vrai lien vers la page équivalente : le changement de langue conserve la page courante, change réellement l’URL, fonctionne sans JavaScript et retombe sur l’accueil si aucune contrepartie n’existe. La préférence est mémorisée dans `localStorage` (`renoqo_locale`) sans redirection automatique.
 
 Voir [docs/internationalization.md](docs/internationalization.md) pour ajouter une traduction, une page ou une nouvelle langue.
 
+## Inscription professionnelle
+
+La page `/pour-les-professionnels/` présente l’offre Renoqo aux artisans et entreprises et recueille une **demande d’inscription** en six étapes (responsable, activité, métiers, zones, présentation, préférences) suivies d’un récapitulatif modifiable. Elle ne crée ni compte ni profil visible : chaque dossier est examiné.
+
+Le brouillon est enregistré dans `localStorage` sans jamais y écrire les fichiers ni les identifiants administratifs (ICE, RC, identifiant fiscal, CNSS).
+
+La soumission utilise un endpoint configurable :
+
+```bash
+NEXT_PUBLIC_PROFESSIONAL_REGISTRATION_ENDPOINT=https://api.renoqo.com/v1/professional-applications
+```
+
+Tant qu’il n’est pas configuré, le formulaire indique clairement que le service est indisponible, conserve le brouillon et permet de réessayer — il n’affiche jamais un faux succès et ne génère jamais de numéro de demande côté navigateur.
+
+Voir [docs/professional-registration.md](docs/professional-registration.md) et [docs/professional-registration-api.md](docs/professional-registration-api.md).
+
 ## Prochaines étapes
 
 - connecter prix, villes, catégories et guides à un CMS ou une base de données ;
+- déployer l’API d’inscription professionnelle (Worker, D1, R2 privé, Turnstile) ;
 - implémenter la demande de devis, l’authentification et la protection anti-abus ;
 - définir le processus réel de vérification des professionnels ;
 - compléter les pages légales avec des informations validées ;
 - traduire l’arabe et activer le RTL selon [docs/internationalization.md](docs/internationalization.md) ;
 - ouvrir les marchés par pays selon la stratégie de [docs/homepage.md](docs/homepage.md).
 
-Voir [docs/homepage.md](docs/homepage.md) pour la documentation fonctionnelle détaillée, [docs/internationalization.md](docs/internationalization.md) pour l’internationalisation et [SECURITY.md](SECURITY.md) pour le signalement de vulnérabilités.
+Voir [docs/homepage.md](docs/homepage.md) pour la documentation fonctionnelle détaillée, [docs/internationalization.md](docs/internationalization.md) pour l’internationalisation, [docs/professional-registration.md](docs/professional-registration.md) pour l’inscription professionnelle et [SECURITY.md](SECURITY.md) pour le signalement de vulnérabilités.
