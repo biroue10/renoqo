@@ -211,3 +211,19 @@ button,a,select,input { -webkit-tap-highlight-color:transparent; }
   .registration-actions .button { width:100%; }
   .group-search { max-width:none; }
 }
+
+/* ---- Quote request experience ---- */
+.quote-hero { padding:68px 0 58px;background:linear-gradient(120deg,#f5fafb,#e6f6f2); }
+.quote-hero h1 { color:var(--navy);font-size:clamp(38px,5vw,62px);line-height:1.08;letter-spacing:-2px;max-width:850px;margin:10px 0 12px; }
+.quote-hero h2 { color:var(--blue);font-size:clamp(19px,2vw,27px);margin:0 0 14px; }
+.quote-hero>div>p:not(.eyebrow):not(.quote-trust) { max-width:760px;color:var(--muted);font-size:17px; }
+.quote-hero .button { margin-top:14px; }.quote-trust { font-size:12px;color:var(--muted);margin-top:17px; }
+.quote-section-title { color:var(--navy);font-size:clamp(28px,3vw,40px);text-align:center;margin:0 0 36px; }
+.quote-benefits { display:grid;grid-template-columns:repeat(3,1fr);gap:14px; }.quote-benefits>div { display:flex;align-items:center;gap:10px;padding:18px;border:1px solid var(--line);border-radius:12px;color:var(--navy);font-weight:700; }.quote-benefits svg { color:var(--green);flex:none; }
+.quote-layout { display:grid;grid-template-columns:300px minmax(0,780px);justify-content:center;gap:38px;align-items:start; }.quote-form-intro { position:sticky;top:98px; }.quote-form-intro h2 { color:var(--navy);font-size:28px; }.quote-form-intro p,.quote-form-intro li { color:var(--muted);font-size:13px; }.quote-form-intro ul { padding-left:20px; }
+.quote-form fieldset { min-width:0; }.quote-form>.registration-body>fieldset { border:0;padding:0;margin:0; }.quote-form>.registration-body>fieldset>legend { color:var(--navy);font-size:18px;font-weight:800;margin-bottom:18px; }.field-grid { display:grid;grid-template-columns:1fr 1fr;gap:16px; }.conditional-fields { display:flex;flex-direction:column;gap:14px; }.conditional-fields fieldset { display:grid;grid-template-columns:1fr 1fr;gap:14px;border:1px solid var(--line);border-radius:12px;padding:16px; }.conditional-fields legend { color:var(--navy);font-weight:800;padding:0 6px; }
+.quote-dropzone { padding:28px;border:2px dashed #9fb6c2;border-radius:14px;background:var(--surface);text-align:center; }.quote-dropzone label { display:block;color:var(--navy);font-weight:800;margin-bottom:10px; }.quote-dropzone input { max-width:100%; }.quote-file-list { padding:0;list-style:none; }.quote-file-list li { display:flex;justify-content:space-between;gap:12px;padding:10px;border-bottom:1px solid var(--line);font-size:12px;overflow-wrap:anywhere; }.quote-success { padding:28px;border:1px solid var(--line);border-radius:16px;background:#edf8f6; }.quote-success h2 { color:var(--navy); }
+.quote-info-grid { display:grid;grid-template-columns:1fr 1fr;gap:22px; }.quote-info-grid article { padding:28px;border:1px solid var(--line);border-radius:15px;background:white; }.quote-info-grid h2 { color:var(--navy); }.quote-info-grid li { margin:9px 0;color:var(--muted); }.quote-info-grid svg { vertical-align:middle;color:var(--green);margin-right:8px; }
+.quote-faq { max-width:850px;margin:auto; }.quote-faq details { border-top:1px solid var(--line);padding:18px 4px; }.quote-faq details:last-child { border-bottom:1px solid var(--line); }.quote-faq summary { cursor:pointer;color:var(--navy);font-weight:800; }.quote-faq p { color:var(--muted);font-size:14px; }
+@media(max-width:900px){.quote-layout { grid-template-columns:1fr; }.quote-form-intro { position:static; }.quote-benefits { grid-template-columns:1fr 1fr; }}
+@media(max-width:640px){.quote-hero { padding:42px 0; }.quote-benefits,.quote-info-grid,.field-grid,.conditional-fields fieldset { grid-template-columns:1fr; }.quote-form .step-list { display:none; }.quote-form .registration-actions { position:sticky;bottom:0;background:white;padding:12px 0;z-index:5; }.quote-dropzone { padding:20px 12px; }}

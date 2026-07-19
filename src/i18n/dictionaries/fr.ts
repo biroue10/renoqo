@@ -1,3 +1,5 @@
+import { quoteRequestFr } from "../quote-request/fr";
+
 /**
  * French dictionary. This file is the reference shape: `Dictionary` is derived
  * from it, so any key added here must also be added to every other locale or
@@ -316,8 +318,8 @@ export const fr = {
     secondary: "Demander des devis",
   },
   footer: {
-    slogan: "Estimate. Compare. Build.",
-    tagline: "Des décisions plus claires pour vos projets de travaux.",
+    slogan: "Des décisions plus claires pour vos projets de travaux.",
+    tagline: "Estimez. Comparez. Réalisez.",
     rights: (year: number) => `© ${year} Renoqo. Tous droits réservés.`,
     socialsLabel: "Réseaux sociaux",
     linkedin: "Renoqo sur LinkedIn",
@@ -371,6 +373,7 @@ export const fr = {
     "politique-cookies": "Politique de cookies",
     "regles-avis": "Règles relatives aux avis",
   },
+  quoteRequest: quoteRequestFr,
   professionals: {
     meta: {
       title: "Inscription professionnelle Renoqo — Développez votre activité",

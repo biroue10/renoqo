@@ -1,0 +1,2 @@
+import { QuoteRequestPage } from "@/components/pages/QuoteRequestPage";import { getDictionary } from "@/i18n/get-dictionary";import { buildMetadata } from "@/lib/metadata";
+const locale="fr" as const;const q=getDictionary(locale).quoteRequest;export const metadata=buildMetadata(locale,"/demander-un-devis",{title:q.meta.title,description:q.meta.description,ogTitle:q.hero.displayTitle,ogDescription:q.hero.description,absoluteTitle:true});export default function Page(){return <QuoteRequestPage locale={locale}/>;}

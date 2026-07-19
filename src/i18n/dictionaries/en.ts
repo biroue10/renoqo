@@ -1,4 +1,5 @@
 import type { Dictionary } from "../types";
+import { quoteRequestEn } from "../quote-request/en";
 
 /** English dictionary. Typed against the French reference shape. */
 export const en: Dictionary = {
@@ -313,8 +314,8 @@ export const en: Dictionary = {
     secondary: "Request quotes",
   },
   footer: {
-    slogan: "Estimate. Compare. Build.",
-    tagline: "Clearer decisions for your building and renovation projects.",
+    slogan: "Clearer decisions for your building and renovation projects.",
+    tagline: "Estimate. Compare. Build.",
     rights: (year: number) => `© ${year} Renoqo. All rights reserved.`,
     socialsLabel: "Social media",
     linkedin: "Renoqo on LinkedIn",
@@ -368,6 +369,7 @@ export const en: Dictionary = {
     "politique-cookies": "Cookie policy",
     "regles-avis": "Review guidelines",
   },
+  quoteRequest: quoteRequestEn,
   professionals: {
     meta: {
       title: "Renoqo Professional Registration — Grow Your Business",

@@ -9,7 +9,7 @@ import { services } from "./services";
  */
 
 /** Pages that own a dedicated route file rather than the `[...slug]` catch-all. */
-export const DEDICATED_PATHS = ["/", "/calculateurs", "/prix", "/guides", "/pour-les-professionnels"] as const;
+export const DEDICATED_PATHS = ["/", "/calculateurs", "/prix", "/guides", "/pour-les-professionnels", "/demander-un-devis"] as const;
 
 /** Pages rendered by the `[...slug]` catch-all. */
 export const CATCH_ALL_PATHS = [
@@ -19,7 +19,6 @@ export const CATCH_ALL_PATHS = [
   "/professionnels",
   "/professionnels/inscription",
   "/connexion",
-  "/demander-un-devis",
 
   "/a-propos",
   "/nos-engagements",
