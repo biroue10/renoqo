@@ -22,14 +22,25 @@ export function alternatesFor(locale: Locale, path: string): Metadata["alternate
   return { canonical: absoluteUrl(locale, path), languages };
 }
 
-type PageMeta = { title: string; description: string; ogTitle?: string; ogDescription?: string };
+type PageMeta = {
+  title: string;
+  description: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  /**
+   * Skips the `%s | Renoqo` template. Use when the title already names Renoqo,
+   * so the suffix would only duplicate the brand and push the title past the
+   * ~60 characters Google shows before truncating.
+   */
+  absoluteTitle?: boolean;
+};
 
 /** Per-page metadata: translated title/description, canonical, hreflang, OG and Twitter cards. */
-export function buildMetadata(locale: Locale, path: string, { title, description, ogTitle, ogDescription }: PageMeta): Metadata {
+export function buildMetadata(locale: Locale, path: string, { title, description, ogTitle, ogDescription, absoluteTitle }: PageMeta): Metadata {
   const d = getDictionary(locale);
   const url = absoluteUrl(locale, path);
   return {
-    title,
+    title: absoluteTitle ? { absolute: title } : title,
     description,
     alternates: alternatesFor(locale, path),
     openGraph: {
