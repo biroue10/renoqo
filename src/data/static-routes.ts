@@ -1,0 +1,33 @@
+export const RENOQO_STATIC_SLUGS = [
+  ["services", "renovation"],
+  ["services", "construction"],
+  ["services", "peinture"],
+  ["services", "plomberie"],
+  ["services", "electricite"],
+  ["services", "carrelage"],
+  ["services", "cuisine"],
+  ["services", "salle-de-bain"],
+  ["services", "climatisation"],
+  ["services", "energie-solaire"],
+
+  ["villes", "casablanca"],
+  ["villes", "rabat"],
+  ["villes", "marrakech"],
+  ["villes", "tanger"],
+  ["villes", "agadir"],
+  ["villes", "fes"],
+
+  ["professionnels", "inscription"],
+  ["pour-les-professionnels"],
+  ["demander-un-devis"],
+  ["contact"],
+  ["a-propos"],
+  ["nos-engagements"],
+  ["centre-aide"],
+
+  ["mentions-legales"],
+  ["conditions-utilisation"],
+  ["politique-confidentialite"],
+  ["politique-cookies"],
+  ["regles-avis"],
+] as const;
