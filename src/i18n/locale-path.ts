@@ -1,5 +1,6 @@
 import { isRoutablePath } from "@/data/routes";
 import { DEFAULT_LOCALE, isLocale, type Locale } from "./config";
+import { guideArticles } from "@/data/guides";
 
 /**
  * French is served at the site root, every other locale under its own prefix.
@@ -41,6 +42,12 @@ export function localizedPath(locale: Locale, path: string): string {
 export function switchLocalePath(locale: Locale, currentPath: string): string {
   const { path: bare } = stripLocale(currentPath);
   const { pathname } = split(bare);
+  const match = pathname.match(/^\/guides\/([^/]+)\/?$/);
+  if (match) {
+    const current = guideArticles.find((guide) => guide.slug === match[1]);
+    const target = current && guideArticles.find((guide) => guide.key === current.key && guide.locale === locale);
+    return target ? localizedPath(locale, `/guides/${target.slug}/`) : localizedPath(locale, "/");
+  }
   if (!isRoutablePath(pathname)) return localizedPath(locale, "/");
   return localizedPath(locale, currentPath);
 }

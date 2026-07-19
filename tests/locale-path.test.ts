@@ -47,7 +47,7 @@ describe("switchLocalePath", () => {
   });
 
   it("round-trips between locales", () => {
-    const original = "/guides/comparer-plusieurs-devis/";
+    const original = "/guides/comparer-devis-travaux-maroc/";
     expect(switchLocalePath("fr", switchLocalePath("en", original))).toBe(original);
   });
 });

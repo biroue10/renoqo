@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { DEFAULT_LOCALE, LOCALES, LOCALE_TAGS, OG_LOCALES, type Locale } from "@/i18n/config";
 import { localizedPath } from "@/i18n/locale-path";
 import { getDictionary } from "@/i18n/get-dictionary";
+import type { GuideArticle } from "@/content/guides/types";
 
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://renoqo.com";
 
@@ -58,5 +59,22 @@ export function buildMetadata(locale: Locale, path: string, { title, description
       description: ogDescription ?? description,
       images: ["/og-renoqo.svg"],
     },
+  };
+}
+
+export const absoluteGuideUrl = (article: GuideArticle) =>
+  `${SITE_URL.replace(/\/$/, "")}${article.locale === "en" ? "/en" : ""}/guides/${article.slug}/`;
+
+export function buildGuideMetadata(article: GuideArticle): Metadata {
+  const canonical = absoluteGuideUrl(article);
+  const counterpart = `${SITE_URL.replace(/\/$/, "")}${article.locale === "fr" ? "/en" : ""}/guides/${article.counterpartSlug}/`;
+  const french = article.locale === "fr" ? canonical : counterpart;
+  const english = article.locale === "en" ? canonical : counterpart;
+  return {
+    title: { absolute: article.seoTitle }, description: article.description,
+    alternates: { canonical, languages: { "fr-MA": french, "en-MA": english, "x-default": french } },
+    robots: { index: true, follow: true },
+    openGraph: { type: "article", locale: OG_LOCALES[article.locale], url: canonical, siteName: "Renoqo", title: article.seoTitle, description: article.description, publishedTime: article.publishedAt, modifiedTime: article.modifiedAt, images: [{ url: "/og-renoqo.svg", width: 1200, height: 630, alt: article.title }] },
+    twitter: { card: "summary_large_image", title: article.seoTitle, description: article.description, images: ["/og-renoqo.svg"] },
   };
 }

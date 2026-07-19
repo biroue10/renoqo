@@ -1,5 +1,4 @@
 import { cities } from "./cities";
-import { guides } from "./guides";
 import { services } from "./services";
 
 /**
@@ -16,7 +15,6 @@ export const DEDICATED_PATHS = ["/", "/calculateurs", "/prix", "/guides", "/pour
 export const CATCH_ALL_PATHS = [
   ...services.map((service) => `/services/${service.slug}`),
   ...cities.map((city) => `/villes/${city.slug}`),
-  ...guides.map((guide) => `/guides/${guide.slug}`),
 
   "/professionnels",
   "/professionnels/inscription",
@@ -40,10 +38,10 @@ export const ROUTABLE_PATHS = [...DEDICATED_PATHS, ...CATCH_ALL_PATHS];
 
 /**
  * Paths advertised in `sitemap.xml`. Sign-in is excluded because it carries no
- * indexable content; individual guide pages are excluded until their editorial
- * content is written, so we never advertise placeholder pages.
+ * indexable content. Full guide articles own localized dynamic routes and are
+ * added separately by `sitemap.ts`, because their French and English slugs differ.
  */
-const SITEMAP_EXCLUDED = new Set(["/connexion", ...guides.map((guide) => `/guides/${guide.slug}`)]);
+const SITEMAP_EXCLUDED = new Set(["/connexion"]);
 
 export const SITEMAP_PATHS = ROUTABLE_PATHS.filter((path) => !SITEMAP_EXCLUDED.has(path));
 
